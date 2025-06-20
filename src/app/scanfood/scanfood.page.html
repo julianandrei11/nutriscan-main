@@ -1,0 +1,48 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">scanfood</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="upload-box">
+    <div class="upload-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+      <ion-icon name="cloud-upload-outline" class="upload-icon"></ion-icon>
+      <p>Drag and Drop files to upload</p>
+      <span>or</span>
+      <label class="browse-button">
+        Browse
+        <input type="file" (change)="onFileSelected($event)" accept="image/*,.pdf,.doc,.docx,.txt" hidden />
+      </label>
+ 
+    </div>
+  </div>
+
+<div *ngIf="uploadedFile" class="upload-preview">
+  <div class="preview-box">
+    <ng-container *ngIf="isImage; else docPreview">
+      <img [src]="uploadedFile" alt="Uploaded Image" />
+    </ng-container>
+    <ng-template #docPreview>
+      <ion-icon name="document-outline"></ion-icon>
+      <p>{{ uploadedFileName }}</p>
+    </ng-template>
+
+    <!-- New content description box -->
+<div class="content-box">
+  <label for="contentDescription">Contents:</label>
+  <ion-textarea
+    id="contentDescription"
+    [(ngModel)]="fileDescription"
+    placeholder="Extracted content will appear here..."
+    autoGrow="true"
+    readonly>
+  </ion-textarea>
+
+
+    </div>
+  </div>
+</div>
+
+
+</ion-content>

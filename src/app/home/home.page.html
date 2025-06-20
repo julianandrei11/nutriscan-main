@@ -1,0 +1,40 @@
+<ion-content class="home-content" scroll-y="false">
+  <div class="logo-section">
+    <img src="assets/image.png" alt="NutriScan Logo" />
+    <h2>Welcome to NutriScan</h2>
+    <p>Scan food, track nutrients, stay healthy.</p>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card button routerLink="/scanfood">
+          <ion-icon name="barcode-outline" size="large"></ion-icon>
+          <ion-label>Scan Food</ion-label>
+        </ion-card>
+      </ion-col>
+      
+      <ion-col size="6">
+        <ion-card button routerLink="/nutritionlogs">
+          <ion-icon name="list" size="large"></ion-icon>
+          <ion-label>Nutrition Logs</ion-label>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-card button routerLink="/goals">
+          <ion-icon name="fitness" size="large"></ion-icon>
+          <ion-label>My Goals</ion-label>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card button routerLink="/profile">
+          <ion-icon name="person-circle" size="large"></ion-icon>
+          <ion-label>Profile</ion-label>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
