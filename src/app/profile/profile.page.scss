@@ -1,0 +1,48 @@
+.profile-content {
+  --background: #f4f5f8;
+
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #3880ff;
+      margin-bottom: 16px;
+    }
+
+    .name {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 4px 0;
+    }
+
+    .email {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .info-card {
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 20px;
+
+      ion-card-content p {
+        margin: 6px 0;
+        font-size: 16px;
+      }
+    }
+
+    ion-button {
+      margin-top: 8px;
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+}

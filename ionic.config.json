@@ -1,0 +1,7 @@
+{
+  "name": "sampleui2capstone",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

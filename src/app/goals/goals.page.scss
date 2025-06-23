@@ -1,0 +1,70 @@
+.date-label {
+    font-size: 14px;
+    color: #1ab3ae;
+    font-weight: 600;
+    margin-top: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .target-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  
+    img {
+      width: 150px;
+      height: auto;
+    }
+  }
+  
+  .task-card {
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 16px;
+  }
+  
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .task-label {
+    font-size: 12px;
+    color: #1ab3ae;
+    margin: 0;
+  }
+  
+  .task-title {
+    font-size: 18px;
+    margin: 2px 0;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .task-time {
+    font-size: 14px;
+    color: #444;
+    margin: 0;
+  }
+  
+  .task-icon {
+    font-size: 24px;
+  }
+  
+  .task-icon.completed {
+    color: #28c76f;
+  }
+  
+  .task-icon.pending {
+    color: #aaa;
+  }
+  
+  .goal-controls {
+    margin-top: 24px;
+  
+    ion-item {
+      margin-bottom: 10px;
+    }
+  }
+  
