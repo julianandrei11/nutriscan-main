@@ -1,13 +1,64 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>goals</ion-title>
+    <ion-title class="ion-text-center">MY GOALS</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">goals</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <!-- Date Label -->
+  <div class="date-label ion-text-center">TUESDAY, 9</div>
+
+  <!-- Target Image -->
+  <div class="target-wrapper">
+    <img src="assets/target.png" alt="Goal Target" />
+  </div>
+
+  <!-- Task Cards -->
+  <ion-card class="task-card">
+    <ion-card-content class="task-item">
+      <div>
+        <p class="task-label">MEAL</p>
+        <h2 class="task-title">BREAKFAST</h2>
+        <p class="task-time">8:00 AM</p>
+      </div>
+      <ion-icon name="checkmark-circle" class="task-icon completed"></ion-icon>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="task-card">
+    <ion-card-content class="task-item">
+      <div>
+        <p class="task-label">MEAL</p>
+        <h2 class="task-title">LUNCH</h2>
+        <p class="task-time">12:30 PM</p>
+      </div>
+      <ion-icon name="checkmark-circle" class="task-icon completed"></ion-icon>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="task-card">
+    <ion-card-content class="task-item">
+      <div>
+        <p class="task-label">MEAL</p>
+        <h2 class="task-title">DINNER</h2>
+        <p class="task-time">7:00 PM</p>
+      </div>
+      <ion-icon name="ellipse-outline" class="task-icon pending"></ion-icon>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Goal Input & Slider -->
+  <div class="goal-controls ion-margin-top">
+    <ion-item>
+      <ion-label position="floating">Target Calories</ion-label>
+      <ion-input type="number" placeholder="e.g. 500"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-range min="1000" max="4000" step="100" pin color="tertiary">
+        <ion-label slot="start">0</ion-label>
+        <ion-label slot="end">1000</ion-label>
+      </ion-range>
+    </ion-item>
+  </div>
 </ion-content>
