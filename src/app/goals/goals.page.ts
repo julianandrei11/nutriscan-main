@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { collection, addDoc, doc, updateDoc, deleteDoc, getDocs } from 'firebase/firestore';
+import { db } from '../../environments/firebase';
 
 @Component({
   selector: 'app-goals',
@@ -10,34 +12,75 @@ export class GoalsPage implements OnInit {
 
   goalLabel: string = '';
   goalValue: number = 1000;
-  goals: { label: string; value: number }[] = [];
+  goals: { id: string; label: string; value: number }[] = [];
 
   isEditing: boolean = false;
   editingIndex: number | null = null;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadGoalsFromFirestore();
+  }
 
-  addGoal() {
+  async loadGoalsFromFirestore() {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'goals'));
+      this.goals = querySnapshot.docs.map(docSnap => ({
+        id: docSnap.id,
+        ...(docSnap.data() as { label: string; value: number })
+      }));
+      console.log('📥 Goals loaded from Firestore.');
+    } catch (error) {
+      console.error('❌ Error loading goals:', error);
+    }
+  }
+
+  async addGoal() {
     if (!this.goalLabel || !this.goalValue) return;
 
     if (this.isEditing && this.editingIndex !== null) {
-      // Update existing goal
-      this.goals[this.editingIndex] = {
-        label: this.goalLabel,
-        value: this.goalValue
-      };
-      this.cancelEdit();
-    } else {
-      // Add new goal
-      this.goals.push({
-        label: this.goalLabel,
-        value: this.goalValue
-      });
-    }
+      const goalToUpdate = this.goals[this.editingIndex];
+      try {
+        const goalRef = doc(db, 'goals', goalToUpdate.id);
+        await updateDoc(goalRef, {
+          label: this.goalLabel,
+          value: this.goalValue,
+          timestamp: new Date()
+        });
 
-    this.goalLabel = '';
+        this.goals[this.editingIndex] = {
+          id: goalToUpdate.id,
+          label: this.goalLabel,
+          value: this.goalValue
+        };
+
+        console.log('✏️ Goal updated in Firestore.');
+        this.cancelEdit();
+      } catch (e) {
+        console.error('❌ Failed to update goal:', e);
+      }
+    } else {
+      try {
+        const docRef = await addDoc(collection(db, 'goals'), {
+          label: this.goalLabel,
+          value: this.goalValue,
+          timestamp: new Date()
+        });
+
+        this.goals.push({
+          id: docRef.id,
+          label: this.goalLabel,
+          value: this.goalValue
+        });
+
+        console.log('✅ Goal added to Firestore.');
+        this.goalLabel = '';
+        this.goalValue = 1000;
+      } catch (e) {
+        console.error('❌ Error adding goal to Firestore:', e);
+      }
+    }
   }
 
   editGoal(index: number) {
@@ -47,9 +90,16 @@ export class GoalsPage implements OnInit {
     this.editingIndex = index;
   }
 
-  deleteGoal(index: number) {
-    this.goals.splice(index, 1);
-    this.cancelEdit(); // cancel edit if item is deleted while editing
+  async deleteGoal(index: number) {
+    const goalToDelete = this.goals[index];
+    try {
+      await deleteDoc(doc(db, 'goals', goalToDelete.id));
+      this.goals.splice(index, 1);
+      this.cancelEdit();
+      console.log('🗑️ Goal deleted from Firestore.');
+    } catch (e) {
+      console.error('❌ Failed to delete goal:', e);
+    }
   }
 
   cancelEdit() {
