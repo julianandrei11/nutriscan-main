@@ -50,15 +50,51 @@
   <!-- Goal Input & Slider -->
   <div class="goal-controls ion-margin-top">
     <ion-item>
-      <ion-label position="floating">Target Calories</ion-label>
-      <ion-input type="number" placeholder="e.g. 500"></ion-input>
+      <ion-label position="floating">Goal for today:</ion-label>
+      <ion-input [(ngModel)]="goalLabel" placeholder="e.g. Calories"></ion-input>
     </ion-item>
 
     <ion-item lines="none">
-      <ion-range min="1000" max="4000" step="100" pin color="tertiary">
-        <ion-label slot="start">0</ion-label>
-        <ion-label slot="end">1000</ion-label>
+      <ion-label slot="start">50</ion-label>
+      <ion-range [(ngModel)]="goalValue" min="50" max="2000" step="100" pin color="tertiary">
+        <ion-label slot="end">{{ goalValue }}</ion-label>
       </ion-range>
     </ion-item>
+
+    <ion-button expand="block" class="ion-margin-top" (click)="addGoal()">Add Goal</ion-button>
   </div>
-</ion-content>
+
+<!-- Table of Today's Goals -->
+<ion-card *ngIf="goals.length > 0" class="ion-margin-top">
+  <ion-card-header>
+    <ion-card-title>Today's Goals</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <table style="width: 100%;">
+      <thead>
+        <tr>
+          <th style="text-align: left;">Goal</th>
+          <th style="text-align: right;">Value</th>
+          <th style="text-align: center;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let g of goals; let i = index">
+          <td>{{ g.label }}</td>
+          <td style="text-align: right;">{{ g.value }}</td>
+          <td style="text-align: center;">
+            <ion-button fill="clear" size="small" color="primary" (click)="editGoal(i)">
+              <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" size="small" color="danger" (click)="deleteGoal(i)">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ion-card-content>
+</ion-card>
+
+<!-- Cancel button when editing -->
+<ion-button *ngIf="isEditing" expand="block" color="medium" (click)="cancelEdit()">Cancel Edit</ion-button>

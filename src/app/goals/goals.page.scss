@@ -66,5 +66,23 @@
     ion-item {
       margin-bottom: 10px;
     }
+    .task-card {
+  margin-bottom: 10px;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-icon.completed {
+  color: green;
+}
+
+.task-icon.pending {
+  color: gray;
+}
+
   }
   
